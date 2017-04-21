@@ -1,17 +1,15 @@
 import React from "react";
 import OrderSummary from "../../components/orderSummary";
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+import shallowToJSON from "enzyme-to-json";
 
 test("OrderSummary snapshot test", () => {
-  const component = renderer.create(<OrderSummary />);
-  const tree = component.toJSON();
+  const component = shallow(<OrderSummary dateFormat={()=>{}}
+                                          tracking={()=>{}}
+                                          order={{ shipping: [{ shipmentMethod: {} }], billing: [{ paymentMethod: {}, invoice: {} }] }}
+                                          shipmentStatus={()=>({})}
+                                          profile={{}}
+                                          printableLabels={()=>({})} />);
+  const tree = shallowToJSON(component);
   expect(tree).toMatchSnapshot();
 });
-
-// function sum(a, b) {
-//   return a + b;
-// }
-
-// test("adds 1 + 2 to equal 3", () => {
-//   expect(sum(1, 2)).toBe(3);
-// });
